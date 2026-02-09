@@ -166,6 +166,16 @@
     padding: 0 5px;
   }
 
+  @keyframes subtitlePop {
+    0% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.75; }
+  }
+
+  .subtitle.pop {
+    animation: subtitlePop 0.6s ease;
+  }
+
   /* ===== YES SECTION (inside card) ===== */
   .yes-section {
     display: flex;
@@ -517,7 +527,7 @@
 <div class="card" id="mainCard">
   <img class="luna-top" src="luna-poses/luna-05-hearteyes.png" alt="Luna">
   <div class="question" id="questionText">Billu... Will You Be My Valentine?</div>
-  <div class="subtitle" id="subtitleText">Your cutiepie has something to ask you...</div>
+  <div class="subtitle" id="subtitleText">Go on billu, you know what to say...</div>
 
   <div class="yes-section">
     <div class="teddy-butler" id="teddyButler">
@@ -541,7 +551,7 @@
     <div class="bears-row" style="gap:8px;">
       <img src="luna-poses/luna-01-laughing.png" alt="Luna" style="width:45px;height:45px;object-fit:contain;vertical-align:middle;">
       <img src="luna-poses/luna-05-hearteyes.png" alt="Luna" style="width:45px;height:45px;object-fit:contain;vertical-align:middle;">
-      <img src="luna-poses/luna-kiss-billu.png" alt="Luna kissing Billu" style="width:140px;height:140px;object-fit:contain;vertical-align:middle;animation:heartPulse 0.6s ease-in-out infinite alternate;">
+      <img src="luna-poses/kyubi-kiss-billu.png" alt="💕" style="width:140px;height:140px;object-fit:contain;vertical-align:middle;animation:heartPulse 0.6s ease-in-out infinite alternate;">
       <img src="luna-poses/luna-05-hearteyes.png" alt="Luna" style="width:45px;height:45px;object-fit:contain;vertical-align:middle;">
       <img src="luna-poses/luna-01-laughing.png" alt="Luna" style="width:45px;height:45px;object-fit:contain;vertical-align:middle;">
     </div>
@@ -556,6 +566,8 @@
 
 <script>
   let noCount = 0;
+  let hopsThisTurn = 0;
+  const maxHopsPerTurn = 2;
 
   // ===== ALL 50 NO-BUTTON MESSAGES =====
   const noMessages = [
@@ -572,16 +584,16 @@
     "No don't click me again!",
     "You're really testing me 😤",
     // Phase 2: Desperate (11-20)
-    "*falls to knees dramatically*",
-    "I'm literally begging billu",
-    "What do I have to do?!",
+    "*dramatically gasps*",
+    "Luna knows you want to say yes billu",
+    "You're making this so hard billu",
     "I'll give you a massage! 💆",
     "A REALLY good massage!",
     "Full back massage, no timer!",
-    "Still no?! I can't believe it 💔",
-    "Luna is sobbing rn 🦊😭",
-    "We're BOTH crying now",
-    "This is a crisis billu!",
+    "Still no?! You're something else billu",
+    "Luna is shook rn 🦊",
+    "Even Luna can't believe this",
+    "Billu this is getting out of hand!",
     // Phase 3: Sweet bribes (21-30)
     "Okay what if... chocolates? 🍫",
     "MOUNTAINS of chocolates!",
@@ -600,10 +612,10 @@
     "A yes so small only I hear it?",
     "I'll accept yes in morse code",
     "Or just blink twice billu",
-    "STOP CLICKING ME 😭",
+    "STOP CLICKING ME, go click Yes!",
     "I'm just a button leave me alone!",
     "Day 39 of asking cutiepie out...",
-    "Luna has filed a complaint",
+    "Luna is rooting for us harder than ever 🦊",
     // Phase 5: Romantic (41-50)
     "Billu... I'm still here 💕",
     "Because you're worth every click",
@@ -628,20 +640,19 @@
     "I'm just a little fox but even I'd say yes",
     "Do it for the chocolates at least! 🍫",
     "Cutiepie please, my little paws can't take this",
-    "I'm begging too now. Say yes 🦊💕",
+    "I believe in you billu. Say yes 🦊💕",
   ];
 
   // ===== SUBTITLE MILESTONES =====
   const subtitleMilestones = {
-    5:  "Billu... Luna and I both need you to say yes 🦊",
-    10: "I'll keep asking forever if I have to, cutiepie",
-    15: "Massage + chocolates + warm hugs... and you STILL said no?!",
-    20: "Okay this is getting serious now billu 😭",
-    25: "You're secretly enjoying this, aren't you billu 😏",
-    30: "The chocolates I bought you are melting from the stress 🍫😭",
-    35: "I know you're smiling. I KNOW it, cutiepie.",
-    40: "So many nos... but my love for you is still at 100% 💕",
-    45: "Just let me love you already billu 💓",
+    4:  "Billu... Luna and I both need you to say yes 🦊",
+    8:  "I'll keep asking forever if I have to, cutiepie",
+    12: "Massage + chocolates + warm hugs... and you STILL said no?!",
+    16: "You're secretly enjoying this, aren't you billu 😏",
+    20: "The chocolates I bought you are melting from the stress 🍫",
+    24: "I know you're smiling. I KNOW it, cutiepie.",
+    28: "My love for you is still at 100% 💕",
+    32: "Just let me love you already billu 💓",
   };
 
   const btnYes = document.getElementById('btnYes');
@@ -654,17 +665,17 @@
   const subtitleText = document.getElementById('subtitleText');
 
   // ===== NO BUTTON RUNS AWAY =====
-  // Dodge on hover (desktop) - starts after attempt 8
+  // Dodge on hover (desktop) - starts after attempt 5, max 2 hops per message
   btnNo.addEventListener('mouseenter', function(e) {
-    if (noCount < 8) return;
-
+    if (noCount < 5 || noCount >= 32 || hopsThisTurn >= maxHopsPerTurn) return;
+    hopsThisTurn++;
     runAway(e.clientX, e.clientY);
   });
 
-  // Dodge on touchstart (mobile) - starts after attempt 8
+  // Dodge on touchstart (mobile) - starts after attempt 5, max 2 hops per message
   btnNo.addEventListener('touchstart', function(e) {
-    if (noCount < 8) return;
-    // Don't prevent default here — let the click still fire
+    if (noCount < 5 || noCount >= 32 || hopsThisTurn >= maxHopsPerTurn) return;
+    hopsThisTurn++;
     const touch = e.touches[0];
     runAway(touch.clientX, touch.clientY);
   }, { passive: true });
@@ -716,6 +727,7 @@
   // ===== SAY NO =====
   function sayNo() {
     noCount++;
+    hopsThisTurn = 0; // reset hops so she gets 2 fresh dodges per message
 
     // Shake the No button itself
     btnNo.classList.remove('shake');
@@ -752,40 +764,85 @@
     // Show puppy eyes after 5 attempts
     if (noCount >= 5) puppyEyes.classList.add('visible');
 
-    // Glow on Yes after 8 attempts
-    if (noCount >= 8) btnYes.classList.add('glow');
+    // Glow on Yes after 5 attempts
+    if (noCount >= 5) btnYes.classList.add('glow');
 
     // Subtitle milestones
     if (subtitleMilestones[noCount]) {
       subtitleText.textContent = subtitleMilestones[noCount];
+      subtitleText.classList.remove('pop');
+      void subtitleText.offsetWidth;
+      subtitleText.classList.add('pop');
     }
 
-    // After attempt 8, also run away on click
-    if (noCount >= 8) {
+    // After attempt 5, run away on click (counts as first hop) — stop at 31 since endgame drift starts at 32
+    if (noCount >= 5 && noCount <= 31) {
+      hopsThisTurn++;
       const rect = btnNo.getBoundingClientRect();
       runAway(rect.left + rect.width / 2, rect.top + rect.height / 2);
     }
 
-    // After 50, auto-yes
-    if (noCount >= 50) {
-      subtitleText.textContent = "Okay cutiepie, I'm deciding for both of us! 😄";
-      btnNo.style.display = 'none';
-      setTimeout(() => sayYes(), 1500);
+    // Endgame: clicks 32-35, No slowly drifts toward Yes
+    if (noCount >= 32) {
+      const yesRect = btnYes.getBoundingClientRect();
+      const yesCenterX = yesRect.left + yesRect.width / 2;
+      const yesCenterY = yesRect.top + yesRect.height / 2;
+
+      // Offset from Yes button EDGE (not center) so No stays outside until click 35
+      const yesHalfW = yesRect.width / 2;
+      const yesHalfH = yesRect.height / 2;
+
+      let offsetX, offsetY, scale, opac;
+      if (noCount === 32) {
+        // Well outside Yes, approaching from bottom-right
+        offsetX = yesHalfW + 70; offsetY = yesHalfH + 50; scale = 0.85; opac = 0.55;
+        subtitleText.textContent = "Wait.. is Luna scaring the No away? 🦊";
+      } else if (noCount === 33) {
+        // Closer, still clearly outside
+        offsetX = yesHalfW + 35; offsetY = yesHalfH + 25; scale = 0.7; opac = 0.4;
+        subtitleText.textContent = "The No is running to hide, billu 😏";
+      } else if (noCount === 34) {
+        // Right at the edge, barely outside
+        offsetX = yesHalfW + 8; offsetY = yesHalfH + 5; scale = 0.5; opac = 0.25;
+        subtitleText.textContent = "Almost gone... 🦊💕";
+      } else {
+        // Behind Yes — fully hidden
+        offsetX = 0; offsetY = 0; scale = 0.3; opac = 0.15;
+        subtitleText.textContent = "Luna scared the No away, cutiepie 🦊💕";
+      }
+
+      // Pop the subtitle text
+      subtitleText.classList.remove('pop');
+      void subtitleText.offsetWidth;
+      subtitleText.classList.add('pop');
+
+      // Drop z-index so No goes BEHIND the Yes button (card is z-index 10)
+      btnNo.style.zIndex = '5';
+      btnNo.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      btnNo.style.left = (yesCenterX + offsetX) + 'px';
+      btnNo.style.top = (yesCenterY + offsetY) + 'px';
+      btnNo.style.bottom = 'auto';
+      btnNo.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      btnNo.style.opacity = opac;
+
+      if (noCount >= 35) {
+        btnNo.style.pointerEvents = 'none';
+      }
     }
 
     // Change Luna's top emotion based on phase
     const lunaTop = document.querySelector('.luna-top');
-    if (noCount <= 5) {
+    if (noCount <= 4) {
       lunaTop.src = 'luna-poses/luna-09-pleading.png';  // pleading
-    } else if (noCount <= 10) {
+    } else if (noCount <= 8) {
       lunaTop.src = 'luna-poses/luna-11-pouting.png';   // pouting
-    } else if (noCount <= 20) {
+    } else if (noCount <= 14) {
       lunaTop.src = 'luna-poses/luna-02-crying.png';     // crying
-    } else if (noCount <= 30) {
+    } else if (noCount <= 20) {
       lunaTop.src = 'luna-poses/luna-03-angry.png';      // angry
-    } else if (noCount <= 38) {
-      lunaTop.src = 'luna-poses/luna-04-sadanticipate.png';   // thinking
-    } else if (noCount <= 46) {
+    } else if (noCount <= 26) {
+      lunaTop.src = 'luna-poses/luna-04-sadanticipate.png';   // sad anticipation
+    } else if (noCount <= 32) {
       lunaTop.src = 'luna-poses/luna-12-pointing.png';   // pointing at Yes!
     } else {
       lunaTop.src = 'luna-poses/luna-06-sad.png';        // sad/sleepy giving up
