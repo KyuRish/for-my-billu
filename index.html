@@ -781,10 +781,13 @@
       void subtitleText.offsetWidth;
       subtitleText.classList.add('pop');
 
-      // Clamp position to stay within the white card's right border
+      // Clamp position so the No button stays within the white card
       const cardRect = mainCard.getBoundingClientRect();
-      let finalX = Math.min(yesCenterX + offsetX, cardRect.right - 4);
-      let finalY = Math.min(yesCenterY + offsetY, cardRect.bottom - 4);
+      const noRect = btnNo.getBoundingClientRect();
+      const noHalfW = noRect.width / 2;
+      const noHalfH = noRect.height / 2;
+      let finalX = Math.min(yesCenterX + offsetX, cardRect.right - 4 - noHalfW);
+      let finalY = Math.min(yesCenterY + offsetY, cardRect.bottom - 4 - noHalfH);
 
       btnNo.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
       btnNo.style.left = finalX + 'px';
