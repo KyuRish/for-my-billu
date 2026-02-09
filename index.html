@@ -477,7 +477,7 @@
     .teddy-butler.visible { width: 42px; height: 42px; }
     .teddy-butler .luna-butler-img { width: 42px; height: 42px; }
     .teddy-butler .speech { font-size: 9px; max-width: 65vw; }
-.luna-sad.visible { width: 40px; height: 40px; }
+    .luna-sad.visible { width: 40px; height: 40px; }
 
     .btn-no {
       padding: 10px 24px;
@@ -515,7 +515,7 @@
 
   <div class="yes-section">
     <div class="teddy-butler" id="teddyButler">
-      <div class="speech" id="teddySpeech">Psst billu... right here! 👉</div>
+      <div class="speech" id="teddySpeech">Psst billu... right here!</div>
       <img class="luna-butler-img" src="luna-poses/luna-12-pointing.png" alt="Luna" />
     </div>
 <button class="btn-yes" id="btnYes" onclick="sayYes()">Yes! 💕</button>
@@ -598,15 +598,15 @@
 
   // ===== TEDDY BUTLER SPEECHES =====
   const teddySpeeches = [
-    "Psst billu... the Yes is right here! 👉",
+    "Psst billu... the Yes is right here!",
     "I heard there are chocolates involved 🍫",
     "He promised the BEST hug ever 🤗",
     "Between us... he planned this all week",
     "I've never seen him try this hard 🥺",
     "He's offering massages, billu. MASSAGES.",
-    "I'm just a little fox but even I'd say yes",
+    "Even a fox like me would say yes!",
     "Do it for the chocolates at least! 🍫",
-    "Cutiepie please, my little paws can't take this",
+    "My little paws can't take this!",
     "I believe in you billu. Say yes 🦊💕",
   ];
 
@@ -614,7 +614,7 @@
   const subtitleMilestones = {
     4:  "Billu... Luna and I both need you to say yes 🦊",
     8:  "I'll keep asking forever if I have to, cutiepie",
-    12: "Massage + chocolates + warm hugs... and you STILL said no?!",
+    12: "Everything I'm offering and you STILL said no?!",
     16: "You're secretly enjoying this, aren't you billu 😏",
     20: "The chocolates I bought you are melting from the stress 🍫",
     24: "I know you're smiling. I KNOW it, cutiepie.",
@@ -629,6 +629,7 @@
   const puppyEyes = document.getElementById('puppyEyes');
   const mainCard = document.getElementById('mainCard');
   const subtitleText = document.getElementById('subtitleText');
+  const lunaTop = document.querySelector('.luna-top');
 
   // ===== NO BUTTON RUNS AWAY =====
   // Dodge on hover (desktop) - starts after attempt 5, max 2 hops per message
@@ -784,8 +785,8 @@
       // Clamp position so No button stays within the white card
       const cardRect = mainCard.getBoundingClientRect();
       const noRect = btnNo.getBoundingClientRect();
-      const noHalfW = (noRect.width * scale) / 2;
-      const noHalfH = (noRect.height * scale) / 2;
+      const noHalfW = noRect.width / 2;
+      const noHalfH = noRect.height / 2;
       let finalX = Math.max(cardRect.left + 4 + noHalfW, Math.min(yesCenterX + offsetX, cardRect.right - 4 - noHalfW));
       let finalY = Math.max(cardRect.top + 4 + noHalfH, Math.min(yesCenterY + offsetY, cardRect.bottom - 4 - noHalfH));
 
@@ -803,7 +804,6 @@
     }
 
     // Change Luna's top emotion based on phase
-    const lunaTop = document.querySelector('.luna-top');
     if (noCount <= 4) {
       lunaTop.src = 'luna-poses/luna-09-pleading.png';  // pleading
     } else if (noCount <= 8) {
@@ -948,7 +948,7 @@
 
     spawnItem();
 
-    setInterval(() => {
+    const showerInterval = setInterval(() => {
       const el = document.createElement(Math.random() > 0.6 ? 'img' : 'div');
       el.className = 'falling-item';
       if (el.tagName === 'IMG') {
@@ -966,6 +966,7 @@
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 8000);
     }, 500);
+    setTimeout(() => clearInterval(showerInterval), 60000);
   }
 
   function spawnMiniLuna() {
