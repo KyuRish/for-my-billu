@@ -158,7 +158,7 @@
   .subtitle {
     font-size: 0.9rem;
     color: #e91e63;
-    margin-bottom: 25px;
+    margin-bottom: 38px;
     opacity: 0.75;
     font-style: italic;
     transition: all 0.5s ease;
@@ -258,6 +258,7 @@
     box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     opacity: 0;
     transition: opacity 0.3s;
+    width: max-content;
     max-width: 75vw;
     text-align: center;
   }
@@ -468,7 +469,7 @@
 
     .question { font-size: 1.6rem; }
 
-    .subtitle { font-size: 0.82rem; margin-bottom: 20px; }
+    .subtitle { font-size: 0.82rem; margin-bottom: 30px; }
 
     .btn-yes {
       padding: 12px 28px;
@@ -787,8 +788,8 @@
         offsetX = yesHalfW + 8; offsetY = yesHalfH + 5; scale = 0.5; opac = 0.25;
         subtitleText.textContent = "Almost gone... 🦊💕";
       } else {
-        // Behind Yes — fully hidden
-        offsetX = 0; offsetY = 0; scale = 0.3; opac = 0.15;
+        // Luna scared it away — fade to nothing
+        offsetX = 0; offsetY = 0; scale = 0.2; opac = 0;
         subtitleText.textContent = "Luna scared the No away, cutiepie 🦊💕";
       }
 
@@ -797,8 +798,6 @@
       void subtitleText.offsetWidth;
       subtitleText.classList.add('pop');
 
-      // Drop z-index so No goes BEHIND the Yes button (card is z-index 10)
-      btnNo.style.zIndex = '5';
       // Clamp position to stay within viewport
       const vw = window.innerWidth;
       const vh = window.innerHeight;
