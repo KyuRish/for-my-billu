@@ -274,22 +274,7 @@
     border-top-color: #f48fb1;
   }
 
-  .point-arrow {
-    font-size: 0px;
-    transition: font-size 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    animation: arrowBounce 0.7s ease-in-out infinite;
-    pointer-events: none;
-    flex-shrink: 0;
-  }
-
-  .point-arrow.visible { font-size: 18px; }
-
-  @keyframes arrowBounce {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(4px); }
-  }
-
-  /* Luna sad face (replaces puppy eyes) */
+/* Luna sad face (replaces puppy eyes) */
   .luna-sad {
     width: 0px;
     height: 0px;
@@ -493,8 +478,7 @@
     .teddy-butler.visible { width: 42px; height: 42px; }
     .teddy-butler .luna-butler-img { width: 42px; height: 42px; }
     .teddy-butler .speech { font-size: 9px; top: -38px; max-width: 65vw; }
-    .point-arrow.visible { font-size: 16px; }
-    .luna-sad.visible { width: 40px; height: 40px; }
+.luna-sad.visible { width: 40px; height: 40px; }
 
     .btn-no {
       padding: 10px 24px;
@@ -535,8 +519,7 @@
       <div class="speech" id="teddySpeech">Psst billu... right here! 👉</div>
       <img class="luna-butler-img" src="luna-poses/luna-12-pointing.png" alt="Luna" />
     </div>
-    <span class="point-arrow" id="pointArrow">👉</span>
-    <button class="btn-yes" id="btnYes" onclick="sayYes()">Yes! 💕</button>
+<button class="btn-yes" id="btnYes" onclick="sayYes()">Yes! 💕</button>
   </div>
 
   <img class="luna-sad" id="puppyEyes" src="luna-poses/luna-02-crying.png" alt="Luna sad">
@@ -659,7 +642,6 @@
   const btnNo = document.getElementById('btnNo');
   const teddyButler = document.getElementById('teddyButler');
   const teddySpeech = document.getElementById('teddySpeech');
-  const pointArrow = document.getElementById('pointArrow');
   const puppyEyes = document.getElementById('puppyEyes');
   const mainCard = document.getElementById('mainCard');
   const subtitleText = document.getElementById('subtitleText');
@@ -756,7 +738,6 @@
     // Show teddy butler after 3 attempts
     if (noCount >= 3) {
       teddyButler.classList.add('visible');
-      pointArrow.classList.add('visible');
       const speechIndex = (noCount - 3) % teddySpeeches.length;
       teddySpeech.textContent = teddySpeeches[speechIndex];
     }
