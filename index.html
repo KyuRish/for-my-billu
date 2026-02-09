@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>For My Billu 💕</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    touch-action: manipulation;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 30%, #f48fb1 60%, #f06292 100%);
+    background-size: 400% 400%;
+    animation: bgShift 15s ease-in-out infinite;
+    font-family: 'Quicksand', sans-serif;
+    position: relative;
+  }
+
+  @keyframes bgShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ===== FLOATING CSS HEARTS ===== */
+  .bg-particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .css-heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    opacity: 0.12;
+    animation: floatUp linear infinite;
+  }
+
+  .css-heart::before,
+  .css-heart::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50% 50% 0 0;
+    background: #e91e63;
+  }
+
+  .css-heart::before {
+    left: -30%;
+    transform: rotate(-45deg);
+    transform-origin: 100% 100%;
+  }
+
+  .css-heart::after {
+    left: 30%;
+    transform: rotate(45deg);
+    transform-origin: 0 100%;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(110vh) rotate(0deg) scale(1); opacity: 0; }
+    10% { opacity: 0.12; }
+    90% { opacity: 0.12; }
+    100% { transform: translateY(-10vh) rotate(360deg) scale(0.5); opacity: 0; }
+  }
+
+  .petal {
+    position: absolute;
+    width: 12px;
+    height: 16px;
+    background: radial-gradient(ellipse, #f48fb1, #e91e63);
+    border-radius: 50% 50% 50% 0;
+    opacity: 0.08;
+    animation: petalDrift linear infinite;
+  }
+
+  @keyframes petalDrift {
+    0% { transform: translateY(-5vh) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.08; }
+    90% { opacity: 0.08; }
+    100% { transform: translateY(110vh) translateX(100px) rotate(720deg); opacity: 0; }
+  }
+
+  /* ===== MAIN CARD ===== */
+  .card {
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(20px);
+    border-radius: 30px;
+    padding: 40px 35px 30px;
+    text-align: center;
+    box-shadow:
+      0 25px 60px rgba(233, 30, 99, 0.15),
+      0 0 0 1px rgba(255, 255, 255, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    max-width: 480px;
+    width: 88%;
+    animation: cardEntry 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  @keyframes cardEntry {
+    0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  .luna-top {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 2px;
+    animation: lunaBounce 2s ease-in-out infinite;
+    display: block;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+
+  @keyframes lunaBounce {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+  }
+
+  .question {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #c2185b, #e91e63, #ad1457, #e91e63, #c2185b);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 4s ease-in-out infinite;
+    margin: 8px 0 6px;
+    line-height: 1.3;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    color: #e91e63;
+    margin-bottom: 25px;
+    opacity: 0.75;
+    font-style: italic;
+    transition: all 0.5s ease;
+    min-height: 1.4em;
+    padding: 0 5px;
+  }
+
+  /* ===== YES SECTION (inside card) ===== */
+  .yes-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 70px;
+  }
+
+  .btn-yes {
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    color: white;
+    border: none;
+    padding: 14px 36px;
+    font-size: 1.1rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.35);
+    white-space: nowrap;
+    -webkit-tap-highlight-color: transparent;
+    transform-origin: center center;
+    flex-shrink: 0;
+  }
+
+  .btn-yes:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 12px 35px rgba(233, 30, 99, 0.5);
+  }
+
+  /* Luna butler */
+  .teddy-butler {
+    width: 0px;
+    height: 0px;
+    overflow: visible;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .teddy-butler.visible {
+    width: 55px;
+    height: 55px;
+  }
+
+  .teddy-butler .luna-butler-img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+    border-radius: 10px;
+    display: block;
+    animation: lunaWiggle 1.5s ease-in-out infinite;
+  }
+
+  @keyframes lunaWiggle {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+  }
+
+  .teddy-butler .speech {
+    position: absolute;
+    background: white;
+    border: 2px solid #f48fb1;
+    border-radius: 15px;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    color: #c2185b;
+    white-space: nowrap;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .teddy-butler.visible .speech { opacity: 1; }
+
+  .teddy-butler .speech::after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: #f48fb1;
+  }
+
+  .point-arrow {
+    font-size: 0px;
+    transition: font-size 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: arrowBounce 0.7s ease-in-out infinite;
+    pointer-events: none;
+    flex-shrink: 0;
+  }
+
+  .point-arrow.visible { font-size: 18px; }
+
+  @keyframes arrowBounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(4px); }
+  }
+
+  /* Luna sad face (replaces puppy eyes) */
+  .luna-sad {
+    width: 0px;
+    height: 0px;
+    margin: 8px auto 0;
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: lunaSadBounce 1.5s ease-in-out infinite;
+    object-fit: contain;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .luna-sad.visible {
+    width: 55px;
+    height: 55px;
+    opacity: 1;
+  }
+
+  @keyframes lunaSadBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  /* Glow pulse */
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(233, 30, 99, 0.3), 0 8px 25px rgba(233, 30, 99, 0.35); }
+    50% { box-shadow: 0 0 40px rgba(233, 30, 99, 0.5), 0 0 80px rgba(233, 30, 99, 0.2), 0 8px 25px rgba(233, 30, 99, 0.35); }
+  }
+
+  .glow { animation: glowPulse 1.5s ease-in-out infinite; }
+
+  /* ===== NO BUTTON - lives OUTSIDE the card, fixed on screen ===== */
+  .btn-no {
+    position: fixed;
+    bottom: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(10px);
+    color: #c2185b;
+    border: 2px solid #f48fb1;
+    padding: 12px 30px;
+    font-size: 1rem;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+    z-index: 20;
+    user-select: none;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(233, 30, 99, 0.1);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .btn-no:hover { background: rgba(252, 228, 236, 0.95); }
+
+  /* No button shake on click */
+  @keyframes noShake {
+    0%, 100% { rotate: 0deg; }
+    15% { rotate: -12deg; }
+    30% { rotate: 10deg; }
+    45% { rotate: -8deg; }
+    60% { rotate: 6deg; }
+    75% { rotate: -3deg; }
+  }
+
+  .btn-no.shake {
+    animation: noShake 0.5s ease;
+  }
+
+  /* ===== CELEBRATION ===== */
+  .celebration-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(252, 228, 236, 0.0);
+    backdrop-filter: blur(10px);
+  }
+
+  .celebration-overlay.active {
+    display: flex;
+    animation: celebBgFade 1.5s ease forwards;
+  }
+
+  @keyframes celebBgFade {
+    to { background: rgba(252, 228, 236, 0.92); }
+  }
+
+  .celebration-card {
+    text-align: center;
+    animation: celebrationEntry 0.8s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    z-index: 101;
+    position: relative;
+    max-width: 550px;
+    width: 90%;
+    padding: 20px 15px;
+  }
+
+  @keyframes celebrationEntry {
+    0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  .celebration-card .big-heart {
+    font-size: 80px;
+    animation: heartPulse 0.6s ease-in-out infinite alternate;
+    display: inline-block;
+  }
+
+  @keyframes heartPulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.2); }
+  }
+
+  .celebration-card h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3rem;
+    color: #c2185b;
+    margin: 12px 0;
+    text-shadow: 0 4px 20px rgba(194, 24, 91, 0.15);
+  }
+
+  .celebration-card .promise {
+    font-size: 1.05rem;
+    color: #ad1457;
+    margin: 8px 0;
+    line-height: 1.6;
+    padding: 0 10px;
+  }
+
+  .celebration-card .bears-row {
+    font-size: 50px;
+    margin: 15px 0;
+    animation: bearDance 1s ease-in-out infinite alternate;
+  }
+
+  @keyframes bearDance {
+    0% { transform: translateY(0) rotate(-3deg); }
+    100% { transform: translateY(-10px) rotate(3deg); }
+  }
+
+  .celebration-card .romantic-line {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.9rem;
+    color: #c2185b;
+    margin-top: 15px;
+  }
+
+  .celebration-card .cta {
+    font-size: 1.15rem;
+    color: #e91e63;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  /* Canvas for confetti */
+  #confettiCanvas {
+    position: fixed;
+    inset: 0;
+    z-index: 105;
+    pointer-events: none;
+  }
+
+  /* Falling items */
+  .falling-item {
+    position: fixed;
+    z-index: 102;
+    pointer-events: none;
+    animation: fall linear forwards;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-80px) rotate(0deg) scale(1); opacity: 1; }
+    85% { opacity: 1; }
+    100% { transform: translateY(110vh) rotate(540deg) scale(0.4); opacity: 0; }
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 480px) {
+    .card {
+      padding: 30px 22px 25px;
+      border-radius: 24px;
+      width: 92%;
+    }
+
+    .luna-top { width: 80px; height: 80px; }
+
+    .question { font-size: 1.6rem; }
+
+    .subtitle { font-size: 0.82rem; margin-bottom: 20px; }
+
+    .btn-yes {
+      padding: 12px 28px;
+      font-size: 1rem;
+    }
+
+    .teddy-butler.visible { width: 42px; height: 42px; }
+    .teddy-butler .luna-butler-img { width: 42px; height: 42px; }
+    .teddy-butler .speech { font-size: 9px; top: -26px; }
+    .point-arrow.visible { font-size: 16px; }
+    .luna-sad.visible { width: 40px; height: 40px; }
+
+    .btn-no {
+      padding: 10px 24px;
+      font-size: 0.9rem;
+      bottom: 12%;
+    }
+
+    .celebration-card h1 { font-size: 2.4rem; }
+    .celebration-card .promise { font-size: 0.92rem; }
+    .celebration-card .bears-row { font-size: 40px; }
+    .celebration-card .romantic-line { font-size: 1.5rem; }
+    .celebration-card .cta { font-size: 1rem; }
+    .celebration-card .big-heart { font-size: 65px; }
+  }
+
+  @media (max-width: 360px) {
+    .card { padding: 25px 18px 20px; }
+    .luna-top { width: 65px; height: 65px; }
+    .question { font-size: 1.4rem; }
+    .btn-yes { padding: 10px 24px; font-size: 0.9rem; }
+    .celebration-card h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating background particles -->
+<div class="bg-particles" id="bgParticles"></div>
+
+<!-- Main card -->
+<div class="card" id="mainCard">
+  <img class="luna-top" src="luna-poses/luna-05-hearteyes.png" alt="Luna">
+  <div class="question" id="questionText">Billu... Will You Be My Valentine?</div>
+  <div class="subtitle" id="subtitleText">Your cutiepie has something to ask you...</div>
+
+  <div class="yes-section">
+    <div class="teddy-butler" id="teddyButler">
+      <div class="speech" id="teddySpeech">Psst billu... right here! 👉</div>
+      <img class="luna-butler-img" src="luna-poses/luna-12-pointing.png" alt="Luna" />
+    </div>
+    <span class="point-arrow" id="pointArrow">👉</span>
+    <button class="btn-yes" id="btnYes" onclick="sayYes()">Yes! 💕</button>
+  </div>
+
+  <img class="luna-sad" id="puppyEyes" src="luna-poses/luna-02-crying.png" alt="Luna sad">
+</div>
+
+<!-- No button lives OUTSIDE the card so it can roam the full screen -->
+<button class="btn-no" id="btnNo" onclick="sayNo()">No</button>
+
+<!-- Celebration overlay -->
+<div class="celebration-overlay" id="celebration">
+  <div class="celebration-card">
+    <h1>Yippieeeeee, a Yes!!!</h1>
+    <div class="bears-row" style="gap:8px;">
+      <img src="luna-poses/luna-01-laughing.png" alt="Luna" style="width:45px;height:45px;object-fit:contain;vertical-align:middle;">
+      <img src="luna-poses/luna-05-hearteyes.png" alt="Luna" style="width:45px;height:45px;object-fit:contain;vertical-align:middle;">
+      <img src="luna-poses/luna-kiss-billu.png" alt="Luna kissing Billu" style="width:140px;height:140px;object-fit:contain;vertical-align:middle;animation:heartPulse 0.6s ease-in-out infinite alternate;">
+      <img src="luna-poses/luna-05-hearteyes.png" alt="Luna" style="width:45px;height:45px;object-fit:contain;vertical-align:middle;">
+      <img src="luna-poses/luna-01-laughing.png" alt="Luna" style="width:45px;height:45px;object-fit:contain;vertical-align:middle;">
+    </div>
+    <p class="promise">I promise you.. endless chocolates, the warmest hugs,<br>back massages with no timer, and all my love... forever.</p>
+    <p class="romantic-line">Happy Valentine's Day, my billu</p>
+    <p class="cta">Now come here and let me hug you</p>
+  </div>
+</div>
+
+<!-- Confetti canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+<script>
+  let noCount = 0;
+
+  // ===== ALL 50 NO-BUTTON MESSAGES =====
+  const noMessages = [
+    "No",
+    // Phase 1: Playful (1-10)
+    "Billu really? 🥺",
+    "Did you just say no to ME?",
+    "Your cutiepie is in shock",
+    "I'm making my sad face rn",
+    "The one you can't resist 🥺",
+    "Billu pleeeease 🦊",
+    "I'll pout forever",
+    "I'm giving you my best puppy eyes 🥺",
+    "No don't click me again!",
+    "You're really testing me 😤",
+    // Phase 2: Desperate (11-20)
+    "*falls to knees dramatically*",
+    "I'm literally begging billu",
+    "What do I have to do?!",
+    "I'll give you a massage! 💆",
+    "A REALLY good massage!",
+    "Full back massage, no timer!",
+    "Still no?! I can't believe it 💔",
+    "Luna is sobbing rn 🦊😭",
+    "We're BOTH crying now",
+    "This is a crisis billu!",
+    // Phase 3: Sweet bribes (21-30)
+    "Okay what if... chocolates? 🍫",
+    "MOUNTAINS of chocolates!",
+    "And we go on a date? 🥰",
+    "I'll take you anywhere you want",
+    "We'll eat dates ON a date 🌴",
+    "And I'll hold you so warm 🤗",
+    "The longest hug ever. Promise.",
+    "Plus forehead kisses. Unlimited.",
+    "This is a VERY generous offer!",
+    "Saying no to all that?! Really?!",
+    // Phase 4: Silly (31-40)
+    "Fine. A tiny yes? A small one?",
+    "A microscopic yes?",
+    "An atom-sized yes? ⚛️",
+    "A yes so small only I hear it?",
+    "I'll accept yes in morse code",
+    "Or just blink twice billu",
+    "STOP CLICKING ME 😭",
+    "I'm just a button leave me alone!",
+    "Day 39 of asking cutiepie out...",
+    "Luna has filed a complaint",
+    // Phase 5: Romantic (41-50)
+    "Billu... I'm still here 💕",
+    "Because you're worth every click",
+    "I'd do this a thousand times",
+    "Just to make you smile reading these",
+    "You're smiling right now, aren't you",
+    "I can feel it from here 😏",
+    "That smile is my whole world",
+    "So just say yes already cutiepie",
+    "Because we both know the answer 💓",
+    "Okay fine I'll say it for us 🥹",
+  ];
+
+  // ===== TEDDY BUTLER SPEECHES =====
+  const teddySpeeches = [
+    "Psst billu... the Yes is right here! 👉",
+    "I heard there are chocolates involved 🍫",
+    "He promised the BEST hug ever 🤗",
+    "Between us... he planned this all week",
+    "I've never seen him try this hard 🥺",
+    "He's offering massages, billu. MASSAGES.",
+    "I'm just a little fox but even I'd say yes",
+    "Do it for the chocolates at least! 🍫",
+    "Cutiepie please, my little paws can't take this",
+    "I'm begging too now. Say yes 🦊💕",
+  ];
+
+  // ===== SUBTITLE MILESTONES =====
+  const subtitleMilestones = {
+    5:  "Billu... Luna and I both need you to say yes 🦊",
+    10: "I'll keep asking forever if I have to, cutiepie",
+    15: "Massage + chocolates + warm hugs... and you STILL said no?!",
+    20: "Okay this is getting serious now billu 😭",
+    25: "You're secretly enjoying this, aren't you billu 😏",
+    30: "The chocolates I bought you are melting from the stress 🍫😭",
+    35: "I know you're smiling. I KNOW it, cutiepie.",
+    40: "So many nos... but my love for you is still at 100% 💕",
+    45: "Just let me love you already billu 💓",
+  };
+
+  const btnYes = document.getElementById('btnYes');
+  const btnNo = document.getElementById('btnNo');
+  const teddyButler = document.getElementById('teddyButler');
+  const teddySpeech = document.getElementById('teddySpeech');
+  const pointArrow = document.getElementById('pointArrow');
+  const puppyEyes = document.getElementById('puppyEyes');
+  const mainCard = document.getElementById('mainCard');
+  const subtitleText = document.getElementById('subtitleText');
+
+  // ===== NO BUTTON RUNS AWAY =====
+  // Dodge on hover (desktop) - starts after attempt 8
+  btnNo.addEventListener('mouseenter', function(e) {
+    if (noCount < 8) return;
+
+    runAway(e.clientX, e.clientY);
+  });
+
+  // Dodge on touchstart (mobile) - starts after attempt 8
+  btnNo.addEventListener('touchstart', function(e) {
+    if (noCount < 8) return;
+    // Don't prevent default here — let the click still fire
+    const touch = e.touches[0];
+    runAway(touch.clientX, touch.clientY);
+  }, { passive: true });
+
+  function runAway(fromX, fromY) {
+    const rect = btnNo.getBoundingClientRect();
+    const bw = rect.width;
+    const bh = rect.height;
+    const pad = 15;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+
+    // Pick a random spot on screen, biased away from the cursor
+    let newX, newY;
+    let attempts = 0;
+    do {
+      newX = Math.random() * (vw - bw - pad * 2) + pad;
+      newY = Math.random() * (vh - bh - pad * 2) + pad;
+      const dx = newX - fromX;
+      const dy = newY - fromY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      attempts++;
+      // Make sure it moves at least 150px away
+      if (dist > 150 || attempts > 20) break;
+    } while (true);
+
+    // Avoid overlapping with the card
+    const cardRect = mainCard.getBoundingClientRect();
+    const overlapX = newX + bw > cardRect.left && newX < cardRect.right;
+    const overlapY = newY + bh > cardRect.top && newY < cardRect.bottom;
+    if (overlapX && overlapY) {
+      // Push it below the card
+      newY = cardRect.bottom + 20;
+      if (newY + bh > vh - pad) newY = cardRect.top - bh - 20;
+    }
+
+    newX = Math.max(pad, Math.min(vw - bw - pad, newX));
+    newY = Math.max(pad, Math.min(vh - bh - pad, newY));
+
+    // Speed up transition as attempts grow
+    const speed = Math.max(0.35 - noCount * 0.004, 0.12);
+    btnNo.style.transition = `all ${speed}s cubic-bezier(0.34, 1.56, 0.64, 1)`;
+    btnNo.style.left = newX + 'px';
+    btnNo.style.top = newY + 'px';
+    btnNo.style.bottom = 'auto';
+    btnNo.style.transform = 'none';
+  }
+
+  // ===== SAY NO =====
+  function sayNo() {
+    noCount++;
+
+    // Shake the No button itself
+    btnNo.classList.remove('shake');
+    void btnNo.offsetWidth;
+    btnNo.classList.add('shake');
+
+    // Update No button text
+    const msgIndex = Math.min(noCount, noMessages.length - 1);
+    btnNo.textContent = noMessages[msgIndex];
+
+    // Grow the Yes button using real size (not scale — scale overlaps Luna)
+    const yesFontSize = 1.1 + (noCount * 0.03);
+    const yesPadV = 14 + (noCount * 0.8);
+    const yesPadH = 36 + (noCount * 1.5);
+    btnYes.style.fontSize = `${Math.min(yesFontSize, 2.6)}rem`;
+    btnYes.style.padding = `${Math.min(yesPadV, 28)}px ${Math.min(yesPadH, 80)}px`;
+
+    // Shrink the No button
+    const noFontSize = Math.max(1 - (noCount * 0.007), 0.55);
+    const noPadH = Math.max(30 - noCount * 0.35, 10);
+    const noPadV = Math.max(12 - noCount * 0.15, 5);
+    btnNo.style.fontSize = `${noFontSize}rem`;
+    btnNo.style.padding = `${noPadV}px ${noPadH}px`;
+    btnNo.style.opacity = Math.max(1 - (noCount * 0.01), 0.35);
+
+    // Show teddy butler after 3 attempts
+    if (noCount >= 3) {
+      teddyButler.classList.add('visible');
+      pointArrow.classList.add('visible');
+      const speechIndex = (noCount - 3) % teddySpeeches.length;
+      teddySpeech.textContent = teddySpeeches[speechIndex];
+    }
+
+    // Show puppy eyes after 5 attempts
+    if (noCount >= 5) puppyEyes.classList.add('visible');
+
+    // Glow on Yes after 8 attempts
+    if (noCount >= 8) btnYes.classList.add('glow');
+
+    // Subtitle milestones
+    if (subtitleMilestones[noCount]) {
+      subtitleText.textContent = subtitleMilestones[noCount];
+    }
+
+    // After attempt 8, also run away on click
+    if (noCount >= 8) {
+      const rect = btnNo.getBoundingClientRect();
+      runAway(rect.left + rect.width / 2, rect.top + rect.height / 2);
+    }
+
+    // After 50, auto-yes
+    if (noCount >= 50) {
+      subtitleText.textContent = "Okay cutiepie, I'm deciding for both of us! 😄";
+      btnNo.style.display = 'none';
+      setTimeout(() => sayYes(), 1500);
+    }
+
+    // Change Luna's top emotion based on phase
+    const lunaTop = document.querySelector('.luna-top');
+    if (noCount <= 5) {
+      lunaTop.src = 'luna-poses/luna-09-pleading.png';  // pleading
+    } else if (noCount <= 10) {
+      lunaTop.src = 'luna-poses/luna-11-pouting.png';   // pouting
+    } else if (noCount <= 20) {
+      lunaTop.src = 'luna-poses/luna-02-crying.png';     // crying
+    } else if (noCount <= 30) {
+      lunaTop.src = 'luna-poses/luna-03-angry.png';      // angry
+    } else if (noCount <= 38) {
+      lunaTop.src = 'luna-poses/luna-04-sadanticipate.png';   // thinking
+    } else if (noCount <= 46) {
+      lunaTop.src = 'luna-poses/luna-12-pointing.png';   // pointing at Yes!
+    } else {
+      lunaTop.src = 'luna-poses/luna-06-sad.png';        // sad/sleepy giving up
+    }
+
+    // Spawn a mini falling Luna from the card area
+    spawnMiniLuna();
+  }
+
+  // ===== SAY YES =====
+  function sayYes() {
+    const celebration = document.getElementById('celebration');
+    celebration.classList.add('active');
+    mainCard.style.display = 'none';
+    btnNo.style.display = 'none';
+
+    startConfetti();
+    startCelebrationShower();
+  }
+
+  // ===== CANVAS CONFETTI =====
+  function startConfetti() {
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ['#e91e63', '#f06292', '#f48fb1', '#ff5252', '#ff80ab', '#c2185b', '#fce4ec', '#ffcdd2', '#f8bbd0', '#ad1457', '#d4a373', '#8b5e3c'];
+    const confetti = [];
+
+    function drawHeart(ctx, x, y, size) {
+      ctx.beginPath();
+      const t = size * 0.3;
+      ctx.moveTo(x, y + t);
+      ctx.bezierCurveTo(x, y, x - size/2, y, x - size/2, y + t);
+      ctx.bezierCurveTo(x - size/2, y + (size+t)/2, x, y + (size+t)/1.3, x, y + size);
+      ctx.bezierCurveTo(x, y + (size+t)/1.3, x + size/2, y + (size+t)/2, x + size/2, y + t);
+      ctx.bezierCurveTo(x + size/2, y, x, y, x, y + t);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    for (let i = 0; i < 200; i++) {
+      confetti.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        w: Math.random() * 10 + 4,
+        h: Math.random() * 6 + 3,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 8,
+        vx: (Math.random() - 0.5) * 3,
+        vy: Math.random() * 3 + 1.5,
+        type: Math.random() > 0.65 ? 'heart' : 'rect',
+        opacity: Math.random() * 0.5 + 0.5,
+      });
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (const c of confetti) {
+        ctx.save();
+        ctx.translate(c.x, c.y);
+        ctx.rotate((c.rotation * Math.PI) / 180);
+        ctx.globalAlpha = c.opacity;
+        ctx.fillStyle = c.color;
+
+        if (c.type === 'heart') {
+          drawHeart(ctx, 0, 0, c.w);
+        } else {
+          ctx.fillRect(-c.w / 2, -c.h / 2, c.w, c.h);
+        }
+
+        ctx.restore();
+
+        c.y += c.vy;
+        c.x += c.vx + Math.sin(c.y * 0.01) * 0.5;
+        c.rotation += c.rotSpeed;
+
+        if (c.y > canvas.height + 20) {
+          c.y = -20;
+          c.x = Math.random() * canvas.width;
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  }
+
+  // ===== LUNA SHOWER =====
+  function startCelebrationShower() {
+    const lunaPoses = [
+      'luna-poses/luna-01-laughing.png',
+      'luna-poses/luna-05-hearteyes.png',
+    ];
+    const emojis = ['🍫', '💕', '💖', '🌹'];
+    let count = 0;
+
+    function spawnItem() {
+      if (count >= 80) return;
+      count++;
+
+      const el = document.createElement(count % 3 === 0 ? 'img' : 'div');
+      el.className = 'falling-item';
+      if (el.tagName === 'IMG') {
+        el.src = lunaPoses[Math.floor(Math.random() * lunaPoses.length)];
+        const size = (30 + Math.random() * 40) + 'px';
+        el.style.width = size;
+        el.style.height = size;
+        el.style.objectFit = 'contain';
+      } else {
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        el.style.fontSize = (22 + Math.random() * 30) + 'px';
+      }
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = (3 + Math.random() * 4) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 8000);
+
+      const delay = count < 40 ? 60 : 200;
+      setTimeout(spawnItem, delay + Math.random() * 80);
+    }
+
+    spawnItem();
+
+    setInterval(() => {
+      const el = document.createElement(Math.random() > 0.6 ? 'img' : 'div');
+      el.className = 'falling-item';
+      if (el.tagName === 'IMG') {
+        el.src = lunaPoses[Math.floor(Math.random() * lunaPoses.length)];
+        const size = (25 + Math.random() * 35) + 'px';
+        el.style.width = size;
+        el.style.height = size;
+        el.style.objectFit = 'contain';
+      } else {
+        el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        el.style.fontSize = (20 + Math.random() * 25) + 'px';
+      }
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.animationDuration = (4 + Math.random() * 3) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 8000);
+    }, 500);
+  }
+
+  function spawnMiniLuna() {
+    const sadPoses = [
+      'luna-poses/luna-02-crying.png',
+      'luna-poses/luna-10-loudcry.png',
+      'luna-poses/luna-11-pouting.png',
+      'luna-poses/luna-07-hurt.png',
+    ];
+    const el = document.createElement('img');
+    el.className = 'falling-item';
+    el.src = sadPoses[Math.floor(Math.random() * sadPoses.length)];
+    el.style.width = '30px';
+    el.style.height = '30px';
+    el.style.objectFit = 'contain';
+    const rect = mainCard.getBoundingClientRect();
+    el.style.left = (rect.left + Math.random() * rect.width) + 'px';
+    el.style.animationDuration = '2.5s';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2500);
+  }
+
+  // ===== BACKGROUND PARTICLES =====
+  function createBgParticles() {
+    const container = document.getElementById('bgParticles');
+
+    for (let i = 0; i < 15; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'css-heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      const size = 10 + Math.random() * 25;
+      heart.style.width = size + 'px';
+      heart.style.height = size + 'px';
+      heart.style.animationDuration = (10 + Math.random() * 15) + 's';
+      heart.style.animationDelay = -(Math.random() * 25) + 's';
+      container.appendChild(heart);
+    }
+
+    for (let i = 0; i < 12; i++) {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = Math.random() * 100 + 'vw';
+      const w = 8 + Math.random() * 10;
+      petal.style.width = w + 'px';
+      petal.style.height = (w * 1.3) + 'px';
+      petal.style.animationDuration = (12 + Math.random() * 18) + 's';
+      petal.style.animationDelay = -(Math.random() * 30) + 's';
+      container.appendChild(petal);
+    }
+  }
+
+  createBgParticles();
+</script>
+</body>
+</html>
