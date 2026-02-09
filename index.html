@@ -252,13 +252,14 @@
     font-family: 'Quicksand', sans-serif;
     font-weight: 600;
     color: #c2185b;
-    white-space: nowrap;
     top: -30px;
     left: 50%;
     transform: translateX(-50%);
     box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     opacity: 0;
     transition: opacity 0.3s;
+    max-width: 75vw;
+    text-align: center;
   }
 
   .teddy-butler.visible .speech { opacity: 1; }
@@ -491,7 +492,7 @@
 
     .teddy-butler.visible { width: 42px; height: 42px; }
     .teddy-butler .luna-butler-img { width: 42px; height: 42px; }
-    .teddy-butler .speech { font-size: 9px; top: -26px; }
+    .teddy-butler .speech { font-size: 9px; top: -38px; max-width: 65vw; }
     .point-arrow.visible { font-size: 16px; }
     .luna-sad.visible { width: 40px; height: 40px; }
 
@@ -818,15 +819,22 @@
 
       // Drop z-index so No goes BEHIND the Yes button (card is z-index 10)
       btnNo.style.zIndex = '5';
+      // Clamp position to stay within viewport
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      let finalX = Math.min(yesCenterX + offsetX, vw - 30);
+      let finalY = Math.min(yesCenterY + offsetY, vh - 30);
+
       btnNo.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-      btnNo.style.left = (yesCenterX + offsetX) + 'px';
-      btnNo.style.top = (yesCenterY + offsetY) + 'px';
+      btnNo.style.left = finalX + 'px';
+      btnNo.style.top = finalY + 'px';
       btnNo.style.bottom = 'auto';
       btnNo.style.transform = `translate(-50%, -50%) scale(${scale})`;
       btnNo.style.opacity = opac;
 
       if (noCount >= 35) {
         btnNo.style.pointerEvents = 'none';
+        teddySpeech.textContent = "It's always been a Yes! 💕";
       }
     }
 
