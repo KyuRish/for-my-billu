@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 - Luna is lost!</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #fce4ec, #f8bbd0, #f48fb1);
+    font-family: 'Quicksand', sans-serif;
+  }
+  .container {
+    text-align: center;
+    padding: 40px 30px;
+  }
+  .luna-sad {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    animation: sadBounce 2s ease-in-out infinite;
+  }
+  @keyframes sadBounce {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-12px) rotate(3deg); }
+  }
+  .code {
+    font-family: 'Dancing Script', cursive;
+    font-size: 5rem;
+    color: #c2185b;
+    margin: 15px 0 5px;
+  }
+  .msg {
+    font-size: 1.2rem;
+    color: #ad1457;
+    font-weight: 600;
+    margin-bottom: 25px;
+  }
+  a {
+    display: inline-block;
+    background: linear-gradient(135deg, #e91e63, #c2185b);
+    color: white;
+    text-decoration: none;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    box-shadow: 0 8px 25px rgba(233, 30, 99, 0.35);
+    transition: filter 0.3s;
+  }
+  a:hover { filter: brightness(1.1); }
+</style>
+</head>
+<body>
+<div class="container">
+  <img class="luna-sad" src="luna-poses/luna-02-crying.png" alt="Luna crying">
+  <div class="code">404</div>
+  <p class="msg">Luna can't find this page.. she's crying now</p>
+  <a href="./">Take her home</a>
+</div>
+</body>
+</html>
