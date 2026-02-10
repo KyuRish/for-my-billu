@@ -439,21 +439,18 @@
   }
 
   .share-btn {
-    margin-top: 18px;
-    padding: 10px 24px;
-    background: linear-gradient(135deg, #f48fb1, #e91e63);
-    color: white;
-    border: none;
-    border-radius: 25px;
+    position: absolute;
+    bottom: 12px;
     font-family: 'Quicksand', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.4);
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 3px 12px rgba(233,30,99,0.3);
+    border: none;
+    background: none;
+    text-decoration: underline;
+    transition: color 0.3s;
   }
-  .share-btn:hover { transform: scale(1.05); box-shadow: 0 5px 18px rgba(233,30,99,0.4); }
-  .share-btn:active { transform: scale(0.97); }
+  .share-btn:hover { color: rgba(255,255,255,0.7); }
 
   /* Canvas for confetti */
   #confettiCanvas {
@@ -566,8 +563,8 @@
     </div>
     <p class="promise">I promise you.. endless chocolates, the warmest hugs,<br>back massages with no timer, and all my love... forever.</p>
     <p class="romantic-line">Happy Valentine's Day, my billu</p>
-    <button class="share-btn" onclick="shareLink()">Share this with someone you love 💌</button>
   </div>
+  <span class="share-btn" onclick="shareLink()">want to make someone smile too?</span>
 </div>
 
 <!-- Confetti canvas -->
