@@ -504,6 +504,10 @@
 </head>
 <body>
 
+<!-- Audio -->
+<audio id="bgMusic" src="lofi-bg.mp3" loop preload="auto"></audio>
+<audio id="celebrationMusic" src="celebration.mp3" preload="auto"></audio>
+
 <!-- Floating background particles -->
 <div class="bg-particles" id="bgParticles"></div>
 
@@ -551,6 +555,18 @@
   let noCount = 0;
   let hopsThisTurn = 0;
   const maxHopsPerTurn = 2;
+
+  // ===== AUDIO =====
+  const bgMusic = document.getElementById('bgMusic');
+  const celebrationMusic = document.getElementById('celebrationMusic');
+  bgMusic.volume = 0.35;
+  let musicStarted = false;
+  function startBgMusic() {
+    if (!musicStarted) {
+      musicStarted = true;
+      bgMusic.play().catch(() => {});
+    }
+  }
 
   // ===== ALL 50 NO-BUTTON MESSAGES =====
   const noMessages = [
@@ -693,6 +709,7 @@
 
   // ===== SAY NO =====
   function sayNo() {
+    startBgMusic();
     noCount++;
     hopsThisTurn = 0; // reset hops so she gets 2 fresh dodges per message
 
@@ -826,6 +843,11 @@
 
   // ===== SAY YES =====
   function sayYes() {
+    // Stop lo-fi, play Bruno Mars
+    bgMusic.pause();
+    celebrationMusic.volume = 0.8;
+    celebrationMusic.play().catch(() => {});
+
     const celebration = document.getElementById('celebration');
     celebration.classList.add('active');
     mainCard.style.display = 'none';
