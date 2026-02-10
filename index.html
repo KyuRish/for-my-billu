@@ -443,14 +443,23 @@
     bottom: 12px;
     font-family: 'Quicksand', sans-serif;
     font-size: 0.65rem;
-    color: rgba(255,255,255,0.4);
+    color: rgba(180,60,100,0.5);
     cursor: pointer;
     border: none;
     background: none;
-    text-decoration: underline;
     transition: color 0.3s;
   }
-  .share-btn:hover { color: rgba(255,255,255,0.7); }
+  .share-btn:hover { color: rgba(180,60,100,0.8); }
+  .share-btn.shared-mode {
+    padding: 6px 16px;
+    font-size: 0.75rem;
+    background: linear-gradient(135deg, #f48fb1, #e91e63);
+    color: white;
+    border-radius: 20px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(233,30,99,0.25);
+  }
+  .share-btn.shared-mode:hover { color: white; opacity: 0.9; }
 
   /* Canvas for confetti */
   #confettiCanvas {
@@ -564,7 +573,7 @@
     <p class="promise">I promise you.. endless chocolates, the warmest hugs,<br>back massages with no timer, and all my love... forever.</p>
     <p class="romantic-line">Happy Valentine's Day, my billu</p>
   </div>
-  <span class="share-btn" onclick="shareLink()">want to make someone smile too?</span>
+  <span class="share-btn" id="shareBtn" onclick="shareLink()">billu 😏 wanna declare this on instagram?</span>
 </div>
 
 <!-- Confetti canvas -->
@@ -583,6 +592,9 @@
     document.getElementById('subtitleText').textContent = 'Go on, you know what to say...';
     document.querySelector('.romantic-line').textContent = 'Happy Valentine\'s Day, my love';
     document.getElementById('teddySpeech').textContent = dp(document.getElementById('teddySpeech').textContent);
+    const shareBtn = document.getElementById('shareBtn');
+    shareBtn.textContent = 'make someone smile too 💌';
+    shareBtn.classList.add('shared-mode');
   }
 
   let noCount = 0;
