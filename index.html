@@ -743,8 +743,17 @@
       teddySpeech.textContent = teddySpeeches[speechIndex];
     }
 
-    // Show puppy eyes after 5 attempts
+    // Show puppy eyes after 5 attempts, change with phases
     if (noCount >= 5) puppyEyes.classList.add('visible');
+    if (noCount <= 9) {
+      puppyEyes.src = 'luna-poses/luna-02-crying.png';
+    } else if (noCount <= 15) {
+      puppyEyes.src = 'luna-poses/luna-10-loudcry.png';
+    } else if (noCount <= 24) {
+      puppyEyes.src = 'luna-poses/luna-11-pouting.png';
+    } else {
+      puppyEyes.src = 'luna-poses/luna-05-hearteyes.png';
+    }
 
     // Glow on Yes after 5 attempts
     if (noCount >= 5) btnYes.classList.add('glow');
