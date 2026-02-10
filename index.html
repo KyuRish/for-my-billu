@@ -513,7 +513,7 @@
 
 <!-- Main card -->
 <div class="card" id="mainCard">
-  <img class="luna-top" src="luna-poses/luna-05-hearteyes.png" alt="Luna">
+  <img class="luna-top" src="luna-poses/luna-01-laughing.png" alt="Luna">
   <div class="question" id="questionText">Billu... Will You Be My Valentine?</div>
   <div class="subtitle" id="subtitleText">Go on billu, you know what to say...</div>
 
@@ -820,20 +820,18 @@
     }
 
     // Change Luna's top emotion based on phase
-    if (noCount <= 4) {
-      lunaTop.src = 'luna-poses/luna-09-pleading.png';  // pleading
-    } else if (noCount <= 8) {
-      lunaTop.src = 'luna-poses/luna-11-pouting.png';   // pouting
-    } else if (noCount <= 14) {
-      lunaTop.src = 'luna-poses/luna-02-crying.png';     // crying
-    } else if (noCount <= 20) {
-      lunaTop.src = 'luna-poses/luna-03-angry.png';      // angry
-    } else if (noCount <= 26) {
-      lunaTop.src = 'luna-poses/luna-04-sadanticipate.png';   // sad anticipation
-    } else if (noCount <= 32) {
-      lunaTop.src = 'luna-poses/luna-12-pointing.png';   // pointing at Yes!
+    if (noCount <= 2) {
+      lunaTop.src = 'luna-poses/luna-06-sad.png';            // light smile
+    } else if (noCount <= 5) {
+      lunaTop.src = 'luna-poses/luna-04-sadanticipate.png';  // sad anticipate
+    } else if (noCount <= 9) {
+      lunaTop.src = 'luna-poses/luna-09-pleading.png';       // pleading
+    } else if (noCount <= 15) {
+      lunaTop.src = 'luna-poses/luna-10-loudcry.png';        // loud cry
+    } else if (noCount <= 24) {
+      lunaTop.src = 'luna-poses/luna-11-pouting.png';        // pouting (secretly enjoying)
     } else {
-      lunaTop.src = 'luna-poses/luna-06-sad.png';        // sad/sleepy giving up
+      lunaTop.src = 'luna-poses/luna-05-hearteyes.png';      // heart eyes (romantic phase)
     }
 
     // Spawn a mini falling Luna from the card area
