@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>For My Billu 💕</title>
+<meta name="description" content="An interactive Valentine's Day page to ask your special someone 💕">
+<meta property="og:title" content="Will You Be My Valentine? 💕">
+<meta property="og:description" content="Someone special made this just for you...">
+<meta property="og:image" content="luna-poses/luna-05-hearteyes.png">
+<meta property="og:type" content="website">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;600;700&display=swap');
 
@@ -433,6 +438,23 @@
     font-weight: 600;
   }
 
+  .share-btn {
+    margin-top: 18px;
+    padding: 10px 24px;
+    background: linear-gradient(135deg, #f48fb1, #e91e63);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 3px 12px rgba(233,30,99,0.3);
+  }
+  .share-btn:hover { transform: scale(1.05); box-shadow: 0 5px 18px rgba(233,30,99,0.4); }
+  .share-btn:active { transform: scale(0.97); }
+
   /* Canvas for confetti */
   #confettiCanvas {
     position: fixed;
@@ -544,6 +566,7 @@
     </div>
     <p class="promise">I promise you.. endless chocolates, the warmest hugs,<br>back massages with no timer, and all my love... forever.</p>
     <p class="romantic-line">Happy Valentine's Day, my billu</p>
+    <button class="share-btn" onclick="shareLink()">Share this with someone you love 💌</button>
   </div>
 </div>
 
@@ -551,6 +574,20 @@
 <canvas id="confettiCanvas"></canvas>
 
 <script>
+  // ===== SHARED MODE =====
+  const isShared = new URLSearchParams(window.location.search).has('shared');
+  function dp(s) {
+    if (!isShared) return s;
+    return s.replace(/\bbillu\b/gi, 'babe').replace(/\bLuna\b/g, 'Foxy').replace(/\bcutiepie\b/gi, 'cutie');
+  }
+  if (isShared) {
+    document.title = 'Will You Be My Valentine? 💕';
+    document.getElementById('questionText').textContent = 'Will You Be My Valentine?';
+    document.getElementById('subtitleText').textContent = 'Go on, you know what to say...';
+    document.querySelector('.romantic-line').textContent = 'Happy Valentine\'s Day, my love';
+    document.getElementById('teddySpeech').textContent = dp(document.getElementById('teddySpeech').textContent);
+  }
+
   let noCount = 0;
   let hopsThisTurn = 0;
   const maxHopsPerTurn = 2;
@@ -567,7 +604,7 @@
     }
   }
 
-  // ===== ALL 50 NO-BUTTON MESSAGES =====
+  // ===== ALL NO-BUTTON MESSAGES =====
   const noMessages = [
     "No",
     // Phase 1: Playful
@@ -609,7 +646,7 @@
     "So just say yes already cutiepie",
     "Because we both know the answer 💓",
     "Okay fine I'll say it for us 🥹",
-  ];
+  ].map(dp);
 
   // ===== TEDDY BUTLER SPEECHES =====
   const teddySpeeches = [
@@ -623,10 +660,10 @@
     "Do it for the chocolates at least! 🍫",
     "My little paws can't take this!",
     "I believe in you billu. Say yes 🦊💕",
-  ];
+  ].map(dp);
 
   // ===== SUBTITLE MILESTONES =====
-  const subtitleMilestones = {
+  const subtitleMilestones = Object.fromEntries(Object.entries({
     4:  "Billu... Luna and I both need you to say yes 🦊",
     8:  "I'll keep asking forever if I have to, cutiepie",
     12: "Everything I'm offering and you STILL said no?!",
@@ -635,7 +672,7 @@
     24: "I know you're smiling. I KNOW it, cutiepie.",
     28: "My love for you is still at 100% 💕",
     32: "Just let me love you already billu 💓",
-  };
+  }).map(([k, v]) => [k, dp(v)]));
 
   const btnYes = document.getElementById('btnYes');
   const btnNo = document.getElementById('btnNo');
@@ -787,11 +824,11 @@
       if (noCount === 32) {
         // Well outside Yes, approaching from bottom-right
         offsetX = yesHalfW + 70; offsetY = yesHalfH + 50; scale = 0.85; opac = 0.55;
-        subtitleText.textContent = "Wait.. is Luna scaring the No away? 🦊";
+        subtitleText.textContent = dp("Wait.. is Luna scaring the No away? 🦊");
       } else if (noCount === 33) {
         // Closer, still clearly outside
         offsetX = yesHalfW + 35; offsetY = yesHalfH + 25; scale = 0.7; opac = 0.4;
-        subtitleText.textContent = "The No is running to hide, billu 😏";
+        subtitleText.textContent = dp("The No is running to hide, billu 😏");
       } else if (noCount === 34) {
         // Right at the edge, barely outside
         offsetX = yesHalfW + 8; offsetY = yesHalfH + 5; scale = 0.5; opac = 0.25;
@@ -799,7 +836,7 @@
       } else {
         // Luna scared it away — fade to nothing
         offsetX = 0; offsetY = 0; scale = 0.2; opac = 0;
-        subtitleText.textContent = "Luna scared the No away, cutiepie 🦊💕";
+        subtitleText.textContent = dp("Luna scared the No away, cutiepie 🦊💕");
       }
 
       // Pop the subtitle text
@@ -861,6 +898,21 @@
 
     startConfetti();
     startCelebrationShower();
+  }
+
+  // ===== SHARE =====
+  function shareLink() {
+    const url = window.location.origin + window.location.pathname + '?shared';
+    const text = 'Will You Be My Valentine? 💕';
+    if (navigator.share) {
+      navigator.share({ title: text, url: url }).catch(() => {});
+    } else {
+      navigator.clipboard.writeText(url).then(() => {
+        const btn = document.querySelector('.share-btn');
+        btn.textContent = 'Link copied! 💕';
+        setTimeout(() => btn.textContent = 'Share this with someone you love 💌', 2000);
+      });
+    }
   }
 
   // ===== CANVAS CONFETTI =====
