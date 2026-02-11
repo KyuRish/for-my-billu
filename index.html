@@ -439,11 +439,16 @@
   }
 
   .yes-counter {
-    margin-top: 14px;
+    position: fixed;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
     font-family: 'Quicksand', sans-serif;
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.6);
+    font-size: 0.65rem;
+    color: rgba(255,255,255,0.45);
     font-weight: 600;
+    z-index: 1;
   }
 
   .share-btn {
@@ -568,6 +573,8 @@
 <!-- No button lives OUTSIDE the card so it can roam the full screen -->
 <button class="btn-no" id="btnNo" onclick="sayNo()">No</button>
 
+<p class="yes-counter" id="yesCounter"></p>
+
 <!-- Celebration overlay -->
 <div class="celebration-overlay" id="celebration">
   <div class="celebration-card">
@@ -581,7 +588,6 @@
     </div>
     <p class="promise">I promise you.. endless chocolates, the warmest hugs,<br>back massages with no timer, and all my love... forever.</p>
     <p class="romantic-line">Happy Valentine's Day, my billu</p>
-    <p class="yes-counter" id="yesCounter"></p>
   </div>
   <span class="share-btn" id="shareBtn" onclick="shareLink()">Billu, wanna declare this on instagram? 😏</span>
 </div>
@@ -605,6 +611,12 @@
     const shareBtn = document.getElementById('shareBtn');
     shareBtn.textContent = 'make someone smile too 💌';
     shareBtn.classList.add('shared-mode');
+    fetch('https://api.counterapi.dev/v1/for-my-billu/yes-clicks/')
+      .then(r => r.json())
+      .then(data => {
+        if (data.count) document.getElementById('yesCounter').textContent = data.count + ' hearts before yours 💕';
+      })
+      .catch(() => {});
   }
 
   let noCount = 0;
@@ -918,15 +930,9 @@
     startConfetti();
     startCelebrationShower();
 
-    // Increment and show Yes counter (shared page only)
+    // Silently increment counter (shared page only)
     if (isShared) {
-      fetch('https://api.counterapi.dev/v1/for-my-billu/yes-clicks/up')
-        .then(r => r.json())
-        .then(data => {
-          const el = document.getElementById('yesCounter');
-          if (data.count) el.textContent = data.count + ' people have said Yes so far 💕';
-        })
-        .catch(() => {});
+      fetch('https://api.counterapi.dev/v1/for-my-billu/yes-clicks/up').catch(() => {});
     }
   }
 
