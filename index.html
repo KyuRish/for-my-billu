@@ -920,8 +920,7 @@
 
     // Increment and show Yes counter (shared page only)
     if (isShared) {
-      const cHeaders = { 'Authorization': 'Bearer ***REDACTED***' };
-      fetch('https://api.counterapi.dev/v2/for-my-billu/yes-clicks/up', { headers: cHeaders })
+      fetch('https://api.counterapi.dev/v1/for-my-billu/yes-clicks/up')
         .then(r => r.json())
         .then(data => {
           const el = document.getElementById('yesCounter');
