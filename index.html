@@ -438,6 +438,14 @@
     font-weight: 600;
   }
 
+  .yes-counter {
+    margin-top: 14px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.6);
+    font-weight: 600;
+  }
+
   .share-btn {
     position: absolute;
     bottom: 12px;
@@ -573,6 +581,7 @@
     </div>
     <p class="promise">I promise you.. endless chocolates, the warmest hugs,<br>back massages with no timer, and all my love... forever.</p>
     <p class="romantic-line">Happy Valentine's Day, my billu</p>
+    <p class="yes-counter" id="yesCounter"></p>
   </div>
   <span class="share-btn" id="shareBtn" onclick="shareLink()">Billu, wanna declare this on instagram? 😏</span>
 </div>
@@ -908,6 +917,18 @@
 
     startConfetti();
     startCelebrationShower();
+
+    // Increment and show Yes counter (shared page only)
+    if (isShared) {
+      const cHeaders = { 'Authorization': 'Bearer ***REDACTED***' };
+      fetch('https://api.counterapi.dev/v2/for-my-billu/yes-clicks/up', { headers: cHeaders })
+        .then(r => r.json())
+        .then(data => {
+          const el = document.getElementById('yesCounter');
+          if (data.count) el.textContent = data.count + ' people have said Yes so far 💕';
+        })
+        .catch(() => {});
+    }
   }
 
   // ===== SHARE =====
