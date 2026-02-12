@@ -486,6 +486,24 @@
   }
   .support-btn:hover { color: rgba(255,255,255,0.6); }
 
+  .support-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .support-modal-card {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    font-family: 'Quicksand', sans-serif;
+  }
+
   /* Canvas for confetti */
   #confettiCanvas {
     position: fixed;
@@ -601,7 +619,16 @@
     <p class="romantic-line">Happy Valentine's Day, my billu</p>
   </div>
   <span class="share-btn" id="shareBtn" onclick="shareLink()">Billu, wanna declare this on instagram? 😏</span>
-  <a class="support-btn" id="supportBtn" href="https://buymeacoffee.com/kyurish" target="_blank" style="display:none;">made someone smile? support from just ₹100 💕</a>
+  <span class="support-btn" id="supportBtn" onclick="document.getElementById('supportModal').style.display='flex'" style="display:none;">made someone smile? support from just ₹100 💕</span>
+</div>
+
+<!-- Support modal -->
+<div class="support-modal" id="supportModal" onclick="if(event.target===this)this.style.display='none'">
+  <div class="support-modal-card">
+    <img src="bmc_qr.png" alt="QR" style="width:180px;height:180px;border-radius:12px;">
+    <p style="margin-top:10px;font-size:0.8rem;color:#c2185b;font-weight:600;">scan to support 💕</p>
+    <a href="https://buymeacoffee.com/kyurish" target="_blank" style="font-size:0.65rem;color:#e91e63;margin-top:6px;">or open buymeacoffee.com</a>
+  </div>
 </div>
 
 <!-- Confetti canvas -->
