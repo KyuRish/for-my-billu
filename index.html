@@ -378,12 +378,20 @@
     position: relative;
     max-width: 550px;
     width: 90%;
-    padding: 20px 15px;
+    padding: 20px 15px 44px;
   }
 
   @keyframes celebrationEntry {
     0% { transform: scale(0) rotate(-20deg); opacity: 0; }
     100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes promiseGrow {
+    0% { opacity: 0; transform: scale(0.7); }
+    100% { opacity: 1; transform: scale(1); }
   }
 
   .celebration-card .big-heart {
@@ -406,11 +414,14 @@
   }
 
   .celebration-card .promise {
-    font-size: 1.05rem;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.15rem;
+    font-weight: 700;
     color: #ad1457;
     margin: 8px 0;
-    line-height: 1.6;
+    line-height: 1.7;
     padding: 0 10px;
+    animation: promiseGrow 5s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .celebration-card .bears-row {
@@ -427,8 +438,24 @@
   .celebration-card .romantic-line {
     font-family: 'Dancing Script', cursive;
     font-size: 1.9rem;
-    color: #c2185b;
+    font-weight: 700;
+    color: #e91e63;
     margin-top: 15px;
+    text-shadow:
+      0 1px 0 #c2185b,
+      0 2px 0 #ad1457,
+      0 3px 6px rgba(194,24,91,0.3),
+      0 0 20px rgba(233,30,99,0.25),
+      0 0 40px rgba(233,30,99,0.15);
+    animation: dreamReveal 2.5s 1.8s cubic-bezier(0.22, 1, 0.36, 1) both, glowPulse 3s 4.3s ease-in-out infinite alternate;
+  }
+  @keyframes dreamReveal {
+    0% { opacity: 0; filter: blur(12px); transform: scale(0.85); }
+    100% { opacity: 1; filter: blur(0); transform: scale(1); }
+  }
+  @keyframes glowPulse {
+    from { text-shadow: 0 1px 0 #c2185b, 0 2px 0 #ad1457, 0 3px 6px rgba(194,24,91,0.3), 0 0 20px rgba(233,30,99,0.25), 0 0 40px rgba(233,30,99,0.15); }
+    to { text-shadow: 0 1px 0 #c2185b, 0 2px 0 #ad1457, 0 3px 6px rgba(194,24,91,0.3), 0 0 30px rgba(233,30,99,0.4), 0 0 60px rgba(233,30,99,0.25); }
   }
 
   .celebration-card .cta {
@@ -471,6 +498,7 @@
     border: none;
     background: none;
     transition: color 0.3s;
+    animation: fadeIn 1.2s 6.5s both;
   }
   .share-btn:hover { color: rgba(180,60,100,0.8); }
   .share-btn.shared-mode {
@@ -481,6 +509,7 @@
     border-radius: 20px;
     font-weight: 600;
     box-shadow: 0 2px 8px rgba(233,30,99,0.25);
+    transition: all 0.3s;
   }
   .share-btn.shared-mode:hover { color: white; opacity: 0.9; }
 
@@ -493,6 +522,7 @@
     border-radius: 14px;
     cursor: pointer;
     transition: all 0.3s;
+    animation: fadeIn 0.8s 8.1s both;
   }
   .support-btn:hover { color: rgba(194,24,91,0.7); background: rgba(255,255,255,0.55); }
 
@@ -500,19 +530,47 @@
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.25);
     z-index: 200;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
+    padding-bottom: 52px;
   }
   .support-modal-card {
     background: white;
-    border-radius: 20px;
-    padding: 24px;
+    border-radius: 16px;
+    padding: 16px 20px 12px;
     text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
     font-family: 'Quicksand', sans-serif;
+    max-width: calc(100vw - 32px);
   }
+  .support-qr-row {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+  }
+  .support-qr-item img {
+    max-width: 120px;
+    width: 100%;
+    border-radius: 10px;
+  }
+  .support-qr-item { padding: 0 18px; }
+  .support-divider {
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.13) 15%, rgba(0,0,0,0.13) 85%, transparent);
+    box-shadow: 1px 0 0 rgba(255,255,255,0.6);
+  }
+  .support-link {
+    display: block;
+    margin-top: 4px;
+    padding: 8px 0;
+    font-size: 0.7rem;
+    color: rgba(0,0,0,0.5);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .support-link:hover { color: rgba(0,0,0,0.7); }
 
   /* Canvas for confetti */
   #confettiCanvas {
@@ -567,7 +625,7 @@
     }
 
     .celebration-card h1 { font-size: 2.4rem; }
-    .celebration-card .promise { font-size: 0.92rem; }
+    .celebration-card .promise { font-size: 1rem; }
     .celebration-card .bears-row { font-size: 40px; }
     .celebration-card .romantic-line { font-size: 1.5rem; }
     .celebration-card .cta { font-size: 1rem; }
@@ -637,9 +695,16 @@
 <!-- Support modal -->
 <div class="support-modal" id="supportModal" onclick="if(event.target===this)this.style.display='none'">
   <div class="support-modal-card">
-    <img src="bmc_qr.png" alt="QR" style="width:180px;height:180px;border-radius:12px;">
-    <p style="margin-top:10px;font-size:0.8rem;color:#c2185b;font-weight:600;">scan to support 💕</p>
-    <a href="https://buymeacoffee.com/kyurish" target="_blank" style="font-size:0.65rem;color:#e91e63;margin-top:6px;">or open buymeacoffee.com</a>
+    <div class="support-qr-row">
+      <div class="support-qr-item">
+        <img src="gpay_qr.png" alt="UPI QR">
+      </div>
+      <div class="support-divider"></div>
+      <div class="support-qr-item">
+        <img src="revolut_qr.png" alt="Revolut QR">
+      </div>
+    </div>
+    <a class="support-link" href="https://revolut.me/kyu_rish" target="_blank" rel="noopener noreferrer">or support via card / revolut</a>
   </div>
 </div>
 
@@ -995,11 +1060,12 @@
     if (navigator.share) {
       navigator.share({ title: text, url: url }).catch(() => {});
     } else {
+      const btn = document.querySelector('.share-btn');
+      const original = btn.textContent;
       navigator.clipboard.writeText(url).then(() => {
-        const btn = document.querySelector('.share-btn');
         btn.textContent = 'Link copied! 💕';
-        setTimeout(() => btn.textContent = 'Share this with someone you love 💌', 2000);
-      });
+        setTimeout(() => btn.textContent = original, 2000);
+      }).catch(() => {});
     }
   }
 
