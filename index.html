@@ -7,7 +7,7 @@
 <meta name="description" content="An interactive Valentine's Day page to ask your special someone 💕">
 <meta property="og:title" content="Will You Be My Valentine? 💕">
 <meta property="og:description" content="Someone special made this just for you...">
-<meta property="og:image" content="luna-poses/luna-05-hearteyes.png">
+<meta property="og:image" content="https://kyurish.github.io/for-my-billu/luna-poses/luna-05-hearteyes.png">
 <meta property="og:type" content="website">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@400;600;700&display=swap');
@@ -713,7 +713,7 @@
 
 <script>
   // ===== SHARED MODE =====
-  const isShared = new URLSearchParams(window.location.search).has('shared');
+  const isShared = window.location.hash === '#shared' || new URLSearchParams(window.location.search).has('shared');
   function dp(s) {
     if (!isShared) return s;
     return s.replace(/\bbillu\b/gi, 'babe').replace(/\bLuna\b/g, 'Foxy').replace(/\bcutiepie\b/gi, 'cutie');
@@ -1055,7 +1055,7 @@
 
   // ===== SHARE =====
   function shareLink() {
-    const url = window.location.origin + window.location.pathname + '?shared';
+    const url = window.location.origin + window.location.pathname + '#shared';
     const text = 'Will You Be My Valentine? 💕';
     if (navigator.share) {
       navigator.share({ title: text, url: url }).catch(() => {});
