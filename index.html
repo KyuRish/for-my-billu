@@ -713,7 +713,10 @@
 
 <script>
   // ===== SHARED MODE =====
-  const isShared = window.location.hash === '#shared' || new URLSearchParams(window.location.search).has('shared');
+  if (new URLSearchParams(window.location.search).has('shared')) {
+    window.location.replace(window.location.pathname + '#shared');
+  }
+  const isShared = window.location.hash === '#shared';
   function dp(s) {
     if (!isShared) return s;
     return s.replace(/\bbillu\b/gi, 'babe').replace(/\bLuna\b/g, 'Foxy').replace(/\bcutiepie\b/gi, 'cutie');
